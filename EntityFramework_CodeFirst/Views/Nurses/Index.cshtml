@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Index</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>Patient</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox-title navy-bg box-shadow">
+            <h5>List of Patient</h5>
+            <div class="ibox-tools">
+                @*<a class="btn btn-primary btn-xs" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("Create","Patients")')"><i class="fa fa-plus"></i> Add New</a>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox box-shadow float-e-margins">
+                <div class="ibox-content">
+
+                    @(Html.DevExtreme().DataGrid<Nurse>()
+                                        .DataSource(ds => ds.Mvc()
+                                            .Controller("Nurses")
+                                            .LoadAction("Get")
+                                            .UpdateAction("Put")
+                                            .InsertAction("Post")
+                                            .Key("EmployeeId"))
+                                            .ShowBorders(true)
+                                            .Paging(p => p.Enabled(true))
+                                            .Editing(e => e.Mode(GridEditMode.Popup)
+                                            .AllowAdding(true)
+                                            .AllowDeleting(true)
+                                            .AllowUpdating(true)
+
+                                            .Popup(p => p
+                                                .Title("Nurse Info")
+                                                .ShowTitle(true)
+                                                .Width(700)
+                                                        .Height(350)
+                                                .Position(pos => pos
+                                                        .My(HorizontalAlignment.Center, VerticalAlignment.Top)
+                                                        .At(HorizontalAlignment.Center, VerticalAlignment.Top)
+                                                        .Of(new JS("window"))
+                                                    )
+                                                 )
+                                             )
+
+
+                                                 .RemoteOperations(true)
+                                                 .Columns(columns =>
+                                                 {
+                                                     columns.AddFor(m => m.Name);
+                                                     columns.AddFor(m => m.Position);
+                                                     columns.AddFor(m => m.Registered);
+                                                     columns.AddFor(m => m.SSN);
+                                                 })
+                                                         .Paging(p => p.PageSize(10))
+                                                         .FilterRow(f => f.Visible(true))
+                                                         .HeaderFilter(f => f.Visible(true))
+                                                         .GroupPanel(p => p.Visible(true))
+                                                         .Grouping(g => g.AutoExpandAll(false))
+                                                         .RemoteOperations(true)
+
+                                                         .Summary(s => s
+                                                             .TotalItems(totalItems =>
+                                                             {
+                                                                 totalItems.AddFor(m => m.EmployeeId).SummaryType(SummaryType.Count);
+                                                             })
+                                                             .GroupItems(groupItems =>
+                                                             {
+                                                                 groupItems.Add().SummaryType(SummaryType.Count);
+                                                             })
+                                                         )
+                    )
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
