@@ -8,8 +8,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using EntityFramework_CodeFirst;
-using Core.Repository;
-using EntityFramework_CodeFirst.Core;
+
+using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 
 namespace EntityFramework_CodeFirst.Controllers
 {

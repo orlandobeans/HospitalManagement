@@ -1,5 +1,5 @@
-using Core.Repository;
-using EntityFramework_CodeFirst.Core;
+
+using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using EntityFramework_CodeFirst.Infrastructure.Repository;
 using System.Data.Entity;
 using System.Web.Mvc;

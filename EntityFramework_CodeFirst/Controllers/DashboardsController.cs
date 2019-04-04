@@ -1,6 +1,6 @@
-﻿using Core.Repository;
+﻿
 using EntityFramework_CodeFirst;
-using EntityFramework_CodeFirst.Core;
+using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

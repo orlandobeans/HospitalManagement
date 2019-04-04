@@ -1,7 +1,7 @@
-﻿using Core.Repository;
+﻿
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-using EntityFramework_CodeFirst.Core;
+using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

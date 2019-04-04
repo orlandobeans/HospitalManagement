@@ -10,8 +10,8 @@ using System.Web.Mvc;
 using DevExtreme.AspNet.Mvc;
 using DevExtreme.AspNet.Data;
 using Newtonsoft.Json;
-using Core.Repository;
 using EntityFramework_CodeFirst.Core;
+using EntityFramework_CodeFirst.Infrastructure.Repository;
 
 namespace EntityFramework_CodeFirst.Controllers
 {

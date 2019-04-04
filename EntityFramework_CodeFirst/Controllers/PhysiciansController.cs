@@ -11,8 +11,8 @@ using EntityFramework_CodeFirst;
 using DevExtreme.AspNet.Mvc;
 using Newtonsoft.Json;
 using DevExtreme.AspNet.Data;
-using Core.Repository;
-using EntityFramework_CodeFirst.Core;
+
+using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 
 namespace EntityFramework_CodeFirst.Controllers
 {

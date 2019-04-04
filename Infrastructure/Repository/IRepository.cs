@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repository
+namespace EntityFramework_CodeFirst.Infrastructure.Repository
 {
    public interface IRepository<T> : IDisposable where T : class
     {
