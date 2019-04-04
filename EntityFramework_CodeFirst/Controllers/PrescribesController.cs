@@ -94,7 +94,9 @@ namespace EntityFramework_CodeFirst.Controllers
         public int Physician { get; set; }
         public int Patient { get; set; }
         public int Medication { get; set; }
-
+        public int Treatment { get; set; }
+        public int Procedure { get; set; }
+        public int Stay { get; set; }
         public int Department { get; set; }
         public DateTime Date { get; set; }
         public int Nurse { get; set; }

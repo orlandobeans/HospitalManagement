@@ -30,6 +30,11 @@ namespace EntityFramework_CodeFirst
             container.RegisterType<IRepository<Affiliated_With>, Repository<Affiliated_With>>();
             container.RegisterType<IRepository<On_Call>, Repository<On_Call>>();
             container.RegisterType<IRepository<Block>, Repository<Block>>();
+            container.RegisterType<IRepository<Procedure>, Repository<Procedure>>();
+            container.RegisterType<IRepository<Room>, Repository<Room>>();
+            container.RegisterType<IRepository<Stay>, Repository<Stay>>();
+            container.RegisterType<IRepository<Trained_In>, Repository<Trained_In>>();
+            container.RegisterType<IRepository<Undergo>, Repository<Undergo>>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

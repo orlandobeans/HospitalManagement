@@ -201,9 +201,14 @@
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PhysiciansController.cs" />
     <Compile Include="Controllers\PrescribesController.cs" />
+    <Compile Include="Controllers\ProceduresController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\ScaffoldingController.cs" />
+    <Compile Include="Controllers\StaysController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\TrainedInsController.cs" />
     <Compile Include="Controllers\UIElementsController.cs" />
+    <Compile Include="Controllers\UndergoesController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
@@ -1590,15 +1595,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
-    <Content Include="Views\Physicians\Create.cshtml" />
-    <Content Include="Views\Physicians\Delete.cshtml" />
-    <Content Include="Views\Physicians\Details.cshtml" />
-    <Content Include="Views\Physicians\Edit.cshtml" />
     <Content Include="Views\Physicians\Index.cshtml" />
-    <Content Include="Views\Appointments\Create.cshtml" />
-    <Content Include="Views\Appointments\Delete.cshtml" />
-    <Content Include="Views\Appointments\Details.cshtml" />
-    <Content Include="Views\Appointments\Edit.cshtml" />
     <Content Include="Views\Appointments\Index.cshtml" />
     <Content Include="Views\Nurses\Index.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -1612,10 +1609,6 @@
     <Content Include="Views\Dashboards\Dashboard_4_1.cshtml" />
     <Content Include="Views\Dashboards\Dashboard_5.cshtml" />
     <Content Include="Views\Departments\Index.cshtml" />
-    <Content Include="Views\Medications\Create.cshtml" />
-    <Content Include="Views\Medications\Delete.cshtml" />
-    <Content Include="Views\Medications\Details.cshtml" />
-    <Content Include="Views\Medications\Edit.cshtml" />
     <Content Include="Views\Medications\Index.cshtml" />
     <Content Include="Views\AppViews\ActivityStream.cshtml" />
     <Content Include="Views\AppViews\Article.cshtml" />
@@ -1781,6 +1774,11 @@
     <Content Include="Views\AffiliatedWith\Index.cshtml" />
     <Content Include="Views\OnCalls\Index.cshtml" />
     <Content Include="Views\Blocks\Index.cshtml" />
+    <Content Include="Views\Procedures\Index.cshtml" />
+    <Content Include="Views\Rooms\Index.cshtml" />
+    <Content Include="Views\Stays\Index.cshtml" />
+    <Content Include="Views\TrainedIns\Index.cshtml" />
+    <Content Include="Views\Undergoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
