@@ -7,8 +7,11 @@
     <div class="col-sm-4">
         <h2>Index</h2>
         <ol class="breadcrumb">
-            <li class="active">
-                <strong>Patient</strong>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Dashboard_2", "Dashboards")">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="@Url.Action("Index", "Nurses")">Nurses</a>
             </li>
         </ol>
     </div>
@@ -16,16 +19,7 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="ibox-title navy-bg box-shadow">
-            <h5>List of Patient</h5>
-            <div class="ibox-tools">
-                @*<a class="btn btn-primary btn-xs" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("Create","Patients")')"><i class="fa fa-plus"></i> Add New</a>*@
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
