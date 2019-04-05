@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.StayService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class StaysController : Controller
     {
-        private readonly IRepository<Stay> _repository;
+        private readonly IStayService _repository;
 
-        public StaysController(IRepository<Stay> repository)
+        public StaysController(IStayService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "StayId" };
 
-            var staysQuery = from p in _repository.GetAll
+            var staysQuery = from p in _repository.GetStays()
                                   select new
                                   {
                                       p.StayId,
@@ -56,7 +57,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(stay);
+            _repository.UpdateStay(stay);
             return new EmptyResult();
         }
 
@@ -71,7 +72,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(stay);
+            _repository.InsertStay(stay);
 
             return new EmptyResult();
         }
@@ -79,7 +80,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteStay(key);
 
             return new EmptyResult();
         }

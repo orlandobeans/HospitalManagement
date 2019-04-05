@@ -36,7 +36,8 @@ namespace Inspinia_MVC5.Controllers
             //var appointments = d as Appointment[] ?? d.ToArray();
             var month = from item in d
                         where item.EndDateDate.Year == DateTime.Today.Year
-                        group item by new { month = item.EndDateDate.Month } into g                        
+                        orderby item.EndDateDate
+                        group item by new { month = item.EndDateDate.Month } into g                          
                         select new
                 {
                     Month = g.Key.month,

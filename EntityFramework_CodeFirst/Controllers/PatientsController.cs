@@ -10,14 +10,15 @@ using System.Web.Mvc;
 using EntityFramework_CodeFirst;
 
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
+using Service.PatientService;
 
 namespace EntityFramework_CodeFirst.Controllers
 {
     public class PatientsController : Controller
     {
-        private readonly IRepository<Patient> _repository;
+        private readonly IPatientService _repository;
 
-        public PatientsController(IRepository<Patient> repository)
+        public PatientsController(IPatientService repository)
         {
             _repository = repository;
         }
@@ -35,7 +36,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "SSN" };
 
-            var patientsQuery = from p in _repository.GetAll
+            var patientsQuery = from p in _repository.GetPatients()
                                 select new
                               {
                                   p.SSN,
@@ -53,7 +54,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpPut]
         public ActionResult Put(int key, string values)
         {
-            var patient = _repository.GetById(key);
+            var patient = _repository.GetPatient(key);
             JsonConvert.PopulateObject(values, patient);
 
             if (!TryValidateModel(patient))
@@ -61,7 +62,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Update(patient);
+            _repository.UpdatePatient(patient);
             return new EmptyResult();
         }
 
@@ -76,7 +77,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(patient);
+            _repository.InsertPatient(patient);
 
             return new EmptyResult();
         }
@@ -84,7 +85,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeletePatient(key);
 
             return new EmptyResult();
         }

@@ -64,5 +64,6 @@ namespace EntityFramework_CodeFirst.Infrastructure.Repository
         /// <param name="id">Identifier</param>
         /// <returns>Entity</returns>
         T GetById(object id);
+        
     }
 }

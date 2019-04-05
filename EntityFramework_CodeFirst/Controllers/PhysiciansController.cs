@@ -13,14 +13,15 @@ using Newtonsoft.Json;
 using DevExtreme.AspNet.Data;
 
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
+using Service.PhysicianService;
 
 namespace EntityFramework_CodeFirst.Controllers
 {
     public class PhysiciansController : Controller
     {
-        private readonly IRepository<Physician> _repository;
+        private readonly IPhysicianService _repository;
 
-        public PhysiciansController(IRepository<Physician> repository)
+        public PhysiciansController(IPhysicianService repository)
         {
             _repository = repository;
         }
@@ -38,7 +39,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "EmployeeId" };
 
-            var physiciansQuery = from p in _repository.GetAll
+            var physiciansQuery = from p in _repository.GetPhysicians()
                                   select new
                                 {
                                     p.EmployeeId,
@@ -54,14 +55,14 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpPut]
         public ActionResult Put(int key, string values)
         {
-            var physician = _repository.GetById(key);
+            var physician = _repository.GetPhysician(key);
             JsonConvert.PopulateObject(values, physician);
 
             if (!TryValidateModel(physician))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(physician);
+            _repository.UpdatePhysician(physician);
             return new EmptyResult();
         }
 
@@ -76,7 +77,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(physician);
+            _repository.InsertPhysician(physician);
 
             return new EmptyResult();
         }
@@ -84,7 +85,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeletePhysician(key);
 
             return new EmptyResult();
         }

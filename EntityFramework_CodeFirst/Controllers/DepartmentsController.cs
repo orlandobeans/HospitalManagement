@@ -12,15 +12,15 @@ using DevExtreme.AspNet.Mvc;
 using DevExtreme.AspNet.Data;
 using Newtonsoft.Json;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
-
+using Service.DepartmentService;
 
 namespace EntityFramework_CodeFirst.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly IRepository<Department> _repository;
+        private readonly IDepartmentService _repository;
 
-        public DepartmentsController(IRepository<Department> repository)
+        public DepartmentsController(IDepartmentService repository)
         {
             _repository = repository;
         }
@@ -38,7 +38,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "DepartmentId" };
 
-            var departmentsQuery = from p in _repository.GetAll
+            var departmentsQuery = from p in _repository.GetDepartments()
                                    select new
                               {
                                   p.DepartmentId,
@@ -53,14 +53,14 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpPut]
         public ActionResult Put(int key, string values)
         {
-            var department = _repository.GetById(key);
+            var department = _repository.GetDepartment(key);
             JsonConvert.PopulateObject(values, department);
 
             if (!TryValidateModel(department))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(department);
+            _repository.UpdateDepartment(department);
             return new EmptyResult();
         }
 
@@ -75,7 +75,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(department);
+            _repository.InsertDepartment(department);
 
             return new EmptyResult();
         }
@@ -83,7 +83,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteDepartment(key);
 
             return new EmptyResult();
         }

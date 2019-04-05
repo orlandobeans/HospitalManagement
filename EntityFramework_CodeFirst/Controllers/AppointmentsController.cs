@@ -12,14 +12,15 @@ using DevExtreme.AspNet.Data;
 using Newtonsoft.Json;
 using EntityFramework_CodeFirst.Core;
 using EntityFramework_CodeFirst.Infrastructure.Repository;
+using Service.AppointmentService;
 
 namespace EntityFramework_CodeFirst.Controllers
 {
     public class AppointmentsController : Controller
     {
-        private readonly IRepository<Appointment> _repository;
+        private readonly IAppointmentService _repository;
 
-        public AppointmentsController(IRepository<Appointment> repository)
+        public AppointmentsController(IAppointmentService repository)
         {
             _repository = repository;
         }
@@ -37,7 +38,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "AppointmentId" };
 
-            var appointmentsQuery = from p in _repository.GetAll
+            var appointmentsQuery = from p in _repository.GetAppointments()
                               select new
                               {
                                   p.AppointmentId,
@@ -56,14 +57,14 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpPut]
         public ActionResult Put(int key, string values)
         {
-            var appointment = _repository.GetById(key);
+            var appointment = _repository.GetAppointment(key);
             JsonConvert.PopulateObject(values, appointment);
 
             if (!TryValidateModel(appointment))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(appointment);
+            _repository.UpdateAppointment(appointment);
             return new EmptyResult();
         }
 
@@ -78,7 +79,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(appointment);
+            _repository.InsertAppointment(appointment);
 
             return new EmptyResult();
         }
@@ -86,7 +87,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteAppointment(key);
 
             return new EmptyResult();
         }

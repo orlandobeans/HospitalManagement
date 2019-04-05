@@ -1,6 +1,23 @@
 
-using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
+using EntityFramework_CodeFirst.Core;
 using EntityFramework_CodeFirst.Infrastructure.Repository;
+using Service.Affiliated_WithService;
+using Service.AffiliatedWithService;
+using Service.AppointmentService;
+using Service.BlockService;
+using Service.DepartmentService;
+using Service.MedicationService;
+using Service.NurseService;
+using Service.On_CallService;
+using Service.OnCallService;
+using Service.PatientService;
+using Service.PhysicianService;
+using Service.PrescribeService;
+using Service.ProcedureService;
+using Service.RoomService;
+using Service.StayService;
+using Service.TrainedInService;
+using Service.UndergoService;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Unity;
@@ -20,21 +37,22 @@ namespace EntityFramework_CodeFirst
             // e.g. container.RegisterType<ITestService, TestService>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-            container.RegisterType<IRepository<Patient>, Repository<Patient>>();
-            container.RegisterType<IRepository<Physician>, Repository<Physician>>();
-            container.RegisterType<IRepository<Medication>, Repository<Medication>>();
-            container.RegisterType<IRepository<Appointment>, Repository<Appointment>>();
-            container.RegisterType<IRepository<Department>, Repository<Department>>();
-            container.RegisterType<IRepository<Nurse>, Repository<Nurse>>();
-            container.RegisterType<IRepository<Prescribe>, Repository<Prescribe>>();
-            container.RegisterType<IRepository<Affiliated_With>, Repository<Affiliated_With>>();
-            container.RegisterType<IRepository<On_Call>, Repository<On_Call>>();
-            container.RegisterType<IRepository<Block>, Repository<Block>>();
-            container.RegisterType<IRepository<Procedure>, Repository<Procedure>>();
-            container.RegisterType<IRepository<Room>, Repository<Room>>();
-            container.RegisterType<IRepository<Stay>, Repository<Stay>>();
-            container.RegisterType<IRepository<Trained_In>, Repository<Trained_In>>();
-            container.RegisterType<IRepository<Undergo>, Repository<Undergo>>();
+            container.RegisterType<IPatientService, PatientService>();
+            container.RegisterType<IPhysicianService, PhysicianService>();
+            container.RegisterType<IMedicationService, MedicationService> ();
+            container.RegisterType<IAppointmentService, AppointmentService>();
+            container.RegisterType<IDepartmentService, DepartmentService>();
+            container.RegisterType<INurseService, NurseService>();
+            container.RegisterType<IPrescribeService, PrescribeService>();
+            container.RegisterType<IAffiliatedWithService, AffiliatedWithService>();
+            container.RegisterType<IOnCallService, OnCallService>();
+            container.RegisterType<IBlockService, BlockService>();
+            container.RegisterType<IProcedureService, ProcedureService> ();
+            container.RegisterType<IRoomService, RoomService> ();
+            container.RegisterType<IStayService, StayService> ();
+            container.RegisterType<ITrainedInService, TrainedInService> ();
+            container.RegisterType<IUndergoService, UndergoService> ();
+            container.RegisterType(typeof(IRepository<>),typeof(Repository<>));
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

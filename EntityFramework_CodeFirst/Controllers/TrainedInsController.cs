@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.TrainedInService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class TrainedInsController : Controller
     {
-        private readonly IRepository<Trained_In> _repository;
+        private readonly ITrainedInService _repository;
 
-        public TrainedInsController(IRepository<Trained_In> repository)
+        public TrainedInsController(ITrainedInService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Physician", "Treatment" };
 
-            var trainedInsQuery = from p in _repository.GetAll
+            var trainedInsQuery = from p in _repository.GetTrainedIns()
                                   select new
                                   {
                                       p.Physician,
@@ -57,7 +58,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(trainedIn);
+            _repository.UpdateTrainedIn(trainedIn);
             return new EmptyResult();
         }
 
@@ -72,7 +73,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(trainedIn);
+            _repository.InsertTrainedIn(trainedIn);
 
             return new EmptyResult();
         }
@@ -80,7 +81,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteTrainedIn(key);
 
             return new EmptyResult();
         }

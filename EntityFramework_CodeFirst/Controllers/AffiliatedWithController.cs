@@ -1,8 +1,9 @@
 ﻿
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
+using EntityFramework_CodeFirst.Core;
 using Newtonsoft.Json;
+using Service.AffiliatedWithService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class AffiliatedWithController : Controller
     {
-        private readonly IRepository<Affiliated_With> _repository;
+        private readonly IAffiliatedWithService _repository;
 
-        public AffiliatedWithController(IRepository<Affiliated_With> repository)
+        public AffiliatedWithController(IAffiliatedWithService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Physician", "Department" };
 
-            var affiliatedWithsQuery = from p in _repository.GetAll
+            var affiliatedWithsQuery = from p in _repository.GetAffiliatedWiths()
                                   select new
                                   {
                                       p.Physician,
@@ -56,7 +57,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(affiliatedWith);
+            _repository.UpdateAffiliatedWith(affiliatedWith);
             return new EmptyResult();
         }
 
@@ -71,7 +72,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(affiliatedWith);
+            _repository.InsertAffiliatedWith(affiliatedWith);
 
             return new EmptyResult();
         }
@@ -79,7 +80,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteAffiliatedWith(key);
 
             return new EmptyResult();
         }

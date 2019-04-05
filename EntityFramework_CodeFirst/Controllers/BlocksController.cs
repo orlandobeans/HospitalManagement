@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.BlockService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class BlocksController : Controller
     {
-        private readonly IRepository<Block> _repository;
+        private readonly IBlockService _repository;
 
-        public BlocksController(IRepository<Block> repository)
+        public BlocksController(IBlockService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Floor", "Code" };
 
-            var blocksQuery = from p in _repository.GetAll
+            var blocksQuery = from p in _repository.GetBlocks()
                                        select new
                                        {
                                            p.Floor,
@@ -55,7 +56,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(block);
+            _repository.UpdateBlock(block);
             return new EmptyResult();
         }
 
@@ -70,7 +71,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(block);
+            _repository.InsertBlock(block);
 
             return new EmptyResult();
         }
@@ -78,7 +79,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteBlock(key);
 
             return new EmptyResult();
         }

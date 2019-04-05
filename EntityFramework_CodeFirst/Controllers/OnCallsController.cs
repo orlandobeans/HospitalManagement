@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.OnCallService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class OnCallsController : Controller
     {
-        private readonly IRepository<On_Call> _repository;
+        private readonly IOnCallService _repository;
 
-        public OnCallsController(IRepository<On_Call> repository)
+        public OnCallsController(IOnCallService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Nurse", "BlockFloor", "BlockCode", "Start", "End" };
 
-            var onCallsQuery = from p in _repository.GetAll
+            var onCallsQuery = from p in _repository.GetOnCalls()
                                        select new
                                        {
                                            p.Nurse,
@@ -58,7 +59,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(onCall);
+            _repository.UpdateOnCall(onCall);
             return new EmptyResult();
         }
 
@@ -73,7 +74,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(onCall);
+            _repository.InsertOnCall(onCall);
 
             return new EmptyResult();
         }
@@ -81,7 +82,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteOnCall(key);
 
             return new EmptyResult();
         }

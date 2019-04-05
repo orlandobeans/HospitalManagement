@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.ProcedureService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class ProceduresController : Controller
     {
-        private readonly IRepository<Procedure> _repository;
+        private readonly IProcedureService _repository;
 
-        public ProceduresController(IRepository<Procedure> repository)
+        public ProceduresController(IProcedureService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Code"};
 
-            var proceduresQuery = from p in _repository.GetAll
+            var proceduresQuery = from p in _repository.GetProcedures()
                                   select new
                                   {
                                       p.Code,
@@ -56,7 +57,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(procedure);
+            _repository.UpdateProcedure(procedure);
             return new EmptyResult();
         }
 
@@ -71,7 +72,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(procedure);
+            _repository.InsertProcedure(procedure);
 
             return new EmptyResult();
         }
@@ -79,7 +80,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteProcedure(key);
 
             return new EmptyResult();
         }

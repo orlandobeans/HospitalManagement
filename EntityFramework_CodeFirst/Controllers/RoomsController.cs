@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.RoomService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class RoomsController : Controller
     {
-        private readonly IRepository<Room> _repository;
+        private readonly IRoomService _repository;
 
-        public RoomsController(IRepository<Room> repository)
+        public RoomsController(IRoomService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Number" };
 
-            var roomsQuery = from p in _repository.GetAll
+            var roomsQuery = from p in _repository.GetRooms()
                                   select new
                                   {
                                       p.Number,
@@ -58,7 +59,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(room);
+            _repository.UpdateRoom(room);
             return new EmptyResult();
         }
 
@@ -73,7 +74,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(room);
+            _repository.InsertRoom(room);
 
             return new EmptyResult();
         }
@@ -81,7 +82,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteRoom(key);
 
             return new EmptyResult();
         }

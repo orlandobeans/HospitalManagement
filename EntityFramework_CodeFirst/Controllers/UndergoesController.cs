@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.UndergoService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class UndergoesController : Controller
     {
-        private readonly IRepository<Undergo> _repository;
+        private readonly IUndergoService _repository;
 
-        public UndergoesController(IRepository<Undergo> repository)
+        public UndergoesController(IUndergoService repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Patient", "Procedure", "Stay","Date" };
 
-            var undergoesQuery = from p in _repository.GetAll
+            var undergoesQuery = from p in _repository.GetUndergos()
                               select new
                               {
                                   p.Patient,
@@ -59,7 +60,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(undergo);
+            _repository.UpdateUndergo(undergo);
             return new EmptyResult();
         }
 
@@ -74,7 +75,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(undergoe);
+            _repository.InsertUndergo(undergoe);
 
             return new EmptyResult();
         }
@@ -82,7 +83,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeleteUndergo(key);
 
             return new EmptyResult();
         }

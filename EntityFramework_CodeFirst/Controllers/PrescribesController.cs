@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFramework_CodeFirst.Core; using EntityFramework_CodeFirst.Infrastructure.Repository;
 using Newtonsoft.Json;
+using Service.PrescribeService;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,9 +16,9 @@ namespace EntityFramework_CodeFirst.Controllers
 {
     public class PrescribesController : Controller
     {
-        private readonly IRepository<Prescribe> _repository;
+        private readonly IPrescribeService _repository;
 
-        public PrescribesController(IRepository<Prescribe> repository)
+        public PrescribesController(IPrescribeService repository)
         {
             _repository = repository;
         }
@@ -33,7 +34,7 @@ namespace EntityFramework_CodeFirst.Controllers
         {
             loadOptions.PrimaryKey = new[] { "Physician", "Patient","Medication","Date"};
 
-            var prescribesQuery = from p in _repository.GetAll
+            var prescribesQuery = from p in _repository.GetPrescribes()
                                     select new
                                     {
                                         p.Physician,
@@ -60,7 +61,7 @@ namespace EntityFramework_CodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
-            _repository.Update(prescribe);
+            _repository.UpdatePrescribe(prescribe);
             return new EmptyResult();
         }
 
@@ -75,7 +76,7 @@ namespace EntityFramework_CodeFirst.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ValidationErrorMessage);
             }
 
-            _repository.Insert(prescribe);
+            _repository.InsertPrescribe(prescribe);
 
             return new EmptyResult();
         }
@@ -83,7 +84,7 @@ namespace EntityFramework_CodeFirst.Controllers
         [HttpDelete]
         public ActionResult Delete(int key)
         {
-            _repository.Delete(key);
+            _repository.DeletePrescribe(key);
 
             return new EmptyResult();
         }
