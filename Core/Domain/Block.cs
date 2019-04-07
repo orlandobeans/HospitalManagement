@@ -7,7 +7,7 @@ namespace EntityFramework_CodeFirst.Core
     
 
     [Table("Block")]
-    public partial class Block
+    public partial class Block: AuditableEntity
     {
         [Key]
         [Column(Order = 0)]

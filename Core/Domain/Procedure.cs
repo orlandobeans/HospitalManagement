@@ -7,7 +7,7 @@ namespace EntityFramework_CodeFirst.Core
     
 
     [Table("Procedure")]
-    public partial class Procedure
+    public partial class Procedure: AuditableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Procedure()

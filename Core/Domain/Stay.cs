@@ -7,7 +7,7 @@ namespace EntityFramework_CodeFirst.Core
     
 
     [Table("Stay")]
-    public partial class Stay
+    public partial class Stay: AuditableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Stay()

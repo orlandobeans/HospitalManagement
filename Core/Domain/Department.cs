@@ -7,7 +7,7 @@ namespace EntityFramework_CodeFirst.Core
     
 
     [Table("Department")]
-    public partial class Department
+    public partial class Department: AuditableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()

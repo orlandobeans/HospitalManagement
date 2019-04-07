@@ -7,7 +7,7 @@ namespace EntityFramework_CodeFirst.Core
     
 
     [Table("Room")]
-    public partial class Room
+    public partial class Room: AuditableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Room()

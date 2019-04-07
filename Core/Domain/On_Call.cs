@@ -6,7 +6,7 @@ namespace EntityFramework_CodeFirst.Core
     using System.ComponentModel.DataAnnotations.Schema;
     
 
-    public partial class On_Call
+    public partial class On_Call: AuditableEntity
     {
         [Key]
         [Column(Order = 0)]

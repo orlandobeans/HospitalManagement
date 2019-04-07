@@ -6,7 +6,7 @@ namespace EntityFramework_CodeFirst.Core
     using System.ComponentModel.DataAnnotations.Schema;
     
 
-    public partial class Prescribe
+    public partial class Prescribe : AuditableEntity
     {
         [Key]
         [Column(Order = 0)]

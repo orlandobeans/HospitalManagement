@@ -44,8 +44,10 @@
   <ItemGroup>
     <Compile Include="Domain\Affiliated_With.cs" />
     <Compile Include="Domain\Appointment.cs" />
+    <Compile Include="Domain\AuditableEntity.cs" />
     <Compile Include="Domain\Block.cs" />
     <Compile Include="Domain\Department.cs" />
+    <Compile Include="Domain\IAuditableEntity.cs" />
     <Compile Include="Domain\Medication.cs" />
     <Compile Include="Domain\Nurse.cs" />
     <Compile Include="Domain\On_Call.cs" />

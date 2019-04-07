@@ -6,7 +6,7 @@ namespace EntityFramework_CodeFirst.Core
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("Appointment")]
-    public partial class Appointment
+    public partial class Appointment: AuditableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Appointment()

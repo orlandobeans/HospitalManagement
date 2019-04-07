@@ -6,7 +6,7 @@ namespace EntityFramework_CodeFirst.Core
     using System.ComponentModel.DataAnnotations.Schema;
     
 
-    public partial class Undergo
+    public partial class Undergo: AuditableEntity
     {
         [Key]
         [Column(Order = 0)]

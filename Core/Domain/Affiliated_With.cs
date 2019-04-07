@@ -5,7 +5,7 @@ namespace EntityFramework_CodeFirst.Core
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Affiliated_With
+    public partial class Affiliated_With: AuditableEntity
     {
         [Key]
         [Column(Order = 0)]

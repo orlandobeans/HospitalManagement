@@ -6,7 +6,7 @@ namespace EntityFramework_CodeFirst.Core
     using System.ComponentModel.DataAnnotations.Schema;
     
 
-    public partial class Trained_In
+    public partial class Trained_In: AuditableEntity
     {
         [Key]
         [Column(Order = 0)]
