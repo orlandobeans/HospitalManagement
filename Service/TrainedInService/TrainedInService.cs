@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityFramework_CodeFirst.Core;
-using EntityFramework_CodeFirst.Infrastructure.Repository;
+using HMS.Core;
+using HMS.Infrastructure.Repository;
 
 namespace Service.TrainedInService
 {

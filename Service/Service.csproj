@@ -74,13 +74,13 @@
     <Compile Include="UnderGoesService\UnderGoService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\Core\HMS.Core.csproj">
       <Project>{0cda09b3-7e78-46b1-85bf-892d271a4ac3}</Project>
-      <Name>Core</Name>
+      <Name>HMS.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+    <ProjectReference Include="..\Infrastructure\HMS.Infrastructure.csproj">
       <Project>{d8ae8b50-c908-42cb-aabf-c9e3924b9289}</Project>
-      <Name>Infrastructure</Name>
+      <Name>HMS.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

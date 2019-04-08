@@ -1,4 +1,4 @@
-namespace EntityFramework_CodeFirst.Core
+namespace HMS.Core
 {
     using System;
     using System.Collections.Generic;

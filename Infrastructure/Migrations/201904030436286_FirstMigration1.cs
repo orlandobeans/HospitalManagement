@@ -1,4 +1,4 @@
-namespace EntityFramework_CodeFirst.Infrastructure
+namespace HMS.Infrastructure
 {
     using System;
     using System.Data.Entity.Migrations;
