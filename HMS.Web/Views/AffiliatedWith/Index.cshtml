@@ -1,0 +1,203 @@
+﻿@model HMS.Web.Models.AffiliatedWithViewModel
+@{
+    ViewBag.Title = "Affiliated With";
+}
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Affiliated With</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Dashboard_2", "Dashboards")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "AffiliatedWith")">Affiliated With</a>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div id="myModalContainer"></div>
+
+@*<div class="row">
+    <div class="col-lg-12">
+        
+    </div>
+</div>*@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox bg-dark ">
+                <div class="ibox-title">
+                    <a class="btn btn-primary btn-xs text-white" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit")')"><i class="fa fa-plus"></i> Add New</a>
+                   <div class="ibox-tools">
+
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#" class="dropdown-item">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="ibox-content">
+
+                        <table id="dtTable" class="table table-striped table-bordered table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Physician</th>
+                                    <th>Department</th>
+                                    <th>Primary Affiliation</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            dataTable = $("#dtTable").DataTable({
+                "bProcessing": true,
+                "sAjaxDataProp":"",
+                "bServerSide": false,
+                "pagingType": "numbers",
+                "width":"150px",
+                "ajax": {
+                    "url": "/AffiliatedWith/Get",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columnDefs": [
+                    {
+                        "targets": [3],
+                        "orderable": false,
+                        "width": "140px"
+                    }
+                ],
+                "responsive": true,
+                "dom": '<"html5buttons"B>lTfgitp',
+                "buttons": [
+                    { "extend": 'copy' },
+                    { "extend": 'csv' },
+                    { "extend": 'excel', "title": 'ExampleFile' },
+                    { "extend": 'pdf', "title": 'ExampleFile' },
+
+                    {
+                        "extend": 'print',
+                        customize: function (win){
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+                "order": [0, "desc"],
+                "columns": [
+                    { "data": "PhysicianName" },
+                    { "data": "DepartmentName" },
+                    { "data": "PrimaryAffiliation" },
+                    {
+                        "data": null, "render": function (data, type, full) {
+                            return "<a class='btn btn-default btn-sm' id='editPhysician' onclick=PopupForm('@Url.Action("AddOrEdit","AffiliatedWith")/" +
+                                "?PhysicianId=" + full['PhysicianId'] +
+                                "&DepartmentId=" + full['DepartmentId'] + "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-primary btn-sm text-white' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i> Delete</a>";
+
+
+                        }
+
+                    }
+
+                ],
+                "language": {
+
+                    "emptyTable" : "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
+        });
+
+
+        function PopupForm(url) {
+            $.get(url,
+                function (data) {
+
+                    console.log(url);
+
+                    $('#myModalContainer').html(data);
+                    $('#myModal').modal('show');
+                });
+
+        }
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if($(form).valid()){
+                $.ajax({
+                    type : "POST",
+                    url : form.action,
+                    data : $(form).serialize(),
+                    success : function (data) {
+                        if (data.success) {
+                            $('#myModal').modal('hide');
+                            dataTable.ajax.reload();
+                        }
+                        toastr.success(data.message);
+                    }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id) {
+            if(confirm('Are You Sure to Delete this nurse Record ?'))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "AffiliatedWith")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                        }
+                        toastr.success(data.message);
+                    }
+
+                });
+            }
+        }        
+    </script>
+}
+
+<div class="modal fade inmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModal" aria-hidden="true" data-backdrop="static">
+
+</div>
+
+
+
+

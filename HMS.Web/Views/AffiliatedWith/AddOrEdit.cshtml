@@ -1,0 +1,67 @@
+﻿
+@model HMS.Web.Models.AffiliatedWithViewModel
+@{
+    Layout = null;
+}
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeInDown">
+            <div class="modal-header navy-bg ">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Affiliated With Form</h4>
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+            </div>
+            @using (Html.BeginForm("AddOrEdit", "AffiliatedWith", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PhysicianId, new { @class = "control-label" })
+                                @Html.DropDownList("PhysicianId",
+                                    new SelectList(ViewBag.Physicians, "EmployeeId", "Name"),
+                                    "Select a Physician",
+                                    new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PhysicianId)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
+                                @Html.DropDownList("DepartmentId",
+                                     new SelectList(ViewBag.Department, "DepartmentId", "Name"),
+                                     "Select a Department",
+                                     new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DepartmentId)
+                            </div>
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PrimaryAffiliation, new { @class = "control-label" })
+                                @Html.CheckBoxFor(model => model.PrimaryAffiliation, new {@class = "i-checks" })
+                                @Html.ValidationMessageFor(model => model.PrimaryAffiliation)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                            <input type="button" value="Cancel" class="btn btn-default" data-dismiss="modal" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

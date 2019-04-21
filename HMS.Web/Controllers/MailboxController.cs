@@ -1,0 +1,43 @@
+using System.Web.Mvc;
+
+namespace HMS.Web.Controllers
+{
+    public class MailboxController : Controller
+    {
+
+        public ActionResult Inbox()
+        {
+            return View();
+        }
+
+        public ActionResult EmailView()
+        {
+            return View();
+        }
+
+        public ActionResult ComposeEmail()
+        {
+            return View();
+        }
+
+        public ActionResult EmailTemplates()
+        {
+            return View();
+        }
+
+        public ActionResult BasicActionEmail()
+        {
+            return View();
+        }
+
+        public ActionResult AlertEmail()
+        {
+            return View();
+        }
+
+        public ActionResult BillingEmail()
+        {
+            return View();
+        }
+    }
+}

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HMS.Core
+namespace HMS.Core.Domain
 {
     public abstract class AuditableEntity : IAuditableEntity
     {

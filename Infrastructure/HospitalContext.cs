@@ -1,4 +1,4 @@
-
+using HMS.Core.Domain;
 
 namespace HMS.Infrastructure
 {
@@ -6,7 +6,6 @@ namespace HMS.Infrastructure
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using HMS.Core;
 
     public partial class HospitalContext : DbContext
     {

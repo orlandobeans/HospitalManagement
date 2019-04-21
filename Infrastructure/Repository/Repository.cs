@@ -7,8 +7,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using HMS.Infrastructure;
 
-namespace HMS.Infrastructure.Repository
+namespace Infrastructure.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

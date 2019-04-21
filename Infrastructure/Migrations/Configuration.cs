@@ -9,7 +9,7 @@ namespace HMS.Infrastructure
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(HospitalContext context)

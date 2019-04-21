@@ -1,4 +1,4 @@
-namespace HMS.Core
+namespace HMS.Core.Domain
 {
     using System;
     using System.Collections.Generic;

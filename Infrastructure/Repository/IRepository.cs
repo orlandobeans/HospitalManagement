@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HMS.Infrastructure.Repository
+namespace Infrastructure.Repository
 {
    public interface IRepository<T> : IDisposable where T : class
     {

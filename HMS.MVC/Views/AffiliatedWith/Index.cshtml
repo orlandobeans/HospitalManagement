@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Affiliated With";
+}
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Affiliated With</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Dashboard_2", "Dashboards")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "AffiliatedWith")">Affiliated With</a>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox box-s@usinghadow float-e-margins">
+                <div class="ibox-content">
+                    @Html.EJS().Grid("Grid").DataSource(dm => dm.Url(Url.Action("Get"))
+                        .InsertUrl(Url.Action("Insert"))
+                        .UpdateUrl(Url.Action("Update"))
+                        .RemoveUrl(Url.Action("Delete"))
+                        .Adaptor("UrlAdaptor")
+                        
+                        ).Columns(col =>
+                        {
+                            col.Field("PhysicianName").IsPrimaryKey(true).ForeignKeyValue("PhysicianName").ForeignKeyField("PhysicianName").DataSource((IEnumerable<object>)ViewBag.physician).EditType("dropdownedit").HeaderText("Physician").Width("120").ValidationRules(new { required = true }).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+                            col.Field("DepartmentName").IsPrimaryKey(true).ForeignKeyValue("DepartmentName").ForeignKeyField("DepartmentName").DataSource((IEnumerable<object>)ViewBag.physician).EditType("dropdownedit").HeaderText("Department").Width("150").ValidationRules(new { required = true }).Add();
+                            col.Field("PrimaryAffiliation").HeaderText("Primary Affiliation").EditType("booleanedit").DisplayAsCheckBox(true).Type("boolean").Width("130").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Left).Add();
+                        }).AllowPaging().AllowExcelExport(true).AllowFiltering().EditSettings(edit =>
+                                    edit.AllowAdding(true).AllowEditing(true)
+                                    .AllowDeleting(true).Mode(Syncfusion.EJ2.Grids.EditMode.Normal)).Toolbar(new List<string>()
+                                    { "Add", "Edit", "Delete", "Update", "Cancel" ,"Search" }).Render()
+
+
+
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script type="text/javascript">
+    var data = @Html.Raw(Json.Encode(ViewBag.DataSource))
+        function create() {
+            return $("<input>");
+        }
+    function Write(args) {
+        args.element.ejComboBox({
+            dataSource: ej.dataUtil.distinct(data, "PhysicianName", true),
+            fields: { text: "Physician Name" },
+            placeholder: 'Select a Physician',
+            value: args.rowdata["PhysicianName"]
+        });
+    }
+
+    function read(args) {
+        var ID = $(".e-combobox").closest(".e-grid").attr("id")
+        return $("#" + ID + "PhysicianName").val();
+    }
+
+    function bound(args) {
+        this.element.width(500)
+    }
+</script>*@
